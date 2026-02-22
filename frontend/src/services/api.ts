@@ -11,14 +11,15 @@ export const api = {
 
   delete: (id: number) => axios.delete(`${BASE}/${id}`),
 
-  uploadCsv: (file: File) => {
+uploadCsv: (file: File) => {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file, file.name);
     return axios.post<{ message: string; count: number; expenses: Expense[] }>(
-      `${BASE}/upload-csv`, formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } }
+      `${process.env.REACT_APP_API_BASE_URL}/api/expenses/upload-csv`,
+      formData
+      // no Content-Type header — let browser set it with boundary automatically
     ).then(r => r.data);
-  },
+},
 
   getAnomalies: () => axios.get<Expense[]>(`${BASE}/anomalies`).then(r => r.data),
 
