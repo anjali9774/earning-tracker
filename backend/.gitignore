@@ -1,0 +1,72 @@
+# ─── Environment (NEVER commit) ───────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ─── Maven Build Output ───────────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# ─── Maven Wrapper ────────────────────────────────────────────────────────────
+.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# ─── Maven Release Plugin ─────────────────────────────────────────────────────
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# ─── Spring Boot ──────────────────────────────────────────────────────────────
+spring-shell.log
+/src/main/resources/application-local.properties
+
+# ─── IntelliJ IDEA ────────────────────────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# ─── Eclipse / STS ────────────────────────────────────────────────────────────
+.classpath
+.project
+.settings/
+.springBeans
+.sts4
+bin/
+
+# ─── VS Code ──────────────────────────────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+log/
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ─── Test & Coverage Reports ──────────────────────────────────────────────────
+/test-output/
+/surefire-reports/
+*.exec
+jacoco.exec
+
+# ─── Temporary Files ──────────────────────────────────────────────────────────
+*.tmp
+*.bak
+*.swp
+*~
