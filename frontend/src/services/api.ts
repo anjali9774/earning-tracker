@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Expense, ExpenseRequest, DashboardData } from '../types';
 
-const BASE = '/api/expenses';
+const BASE = `${process.env.REACT_APP_API_BASE_URL}/api/expenses`;
+
 
 export const api = {
   getAll: () => axios.get<Expense[]>(BASE).then(r => r.data),
