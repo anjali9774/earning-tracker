@@ -5,6 +5,7 @@ import {
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis,
   CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
+import axios from 'axios';
 
 // ─── Utility ──────────────────────────────────────────────────────────────────
 const fmt = (n: number) =>
@@ -97,20 +98,32 @@ function CsvUpload({ onUploaded }: { onUploaded: () => void }) {
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
 
-  const handleUpload = async () => {
+ const handleUpload = async () => {
     if (!file) return;
     setLoading(true); setResult(''); setError('');
     try {
-      const res = await api.uploadCsv(file);
-      setResult(`✓ Imported ${res.count} expenses successfully.`);
+      const formData = new FormData();
+      formData.append('file', file, file.name);   // ← explicitly pass file.name
+      
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/expenses/upload-csv`,
+        formData,
+        { 
+          headers: { 'Content-Type': 'multipart/form-data' },
+          withCredentials: false
+        }
+      );
+      setResult(`✓ Imported ${res.data.count} expenses successfully.`);
       setFile(null);
       onUploaded();
-    } catch {
-      setError('Upload failed. Check file format.');
+    } catch (err: any) {
+      // Show actual backend error message instead of generic one
+      const msg = err?.response?.data?.error || err?.response?.data || 'Upload failed. Check file format.';
+      setError(typeof msg === 'string' ? msg : JSON.stringify(msg));
     } finally {
       setLoading(false);
     }
-  };
+};
 
   return (
     <div className="form-card">
